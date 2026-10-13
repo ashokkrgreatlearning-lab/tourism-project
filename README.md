@@ -38,32 +38,56 @@ ProdTaken: Indicates whether the customer purchased the package
 # 1 – Yes
 
 # Customer Details
-CustomerID: Unique identifier for each customer
+
+Customer ID: Unique identifier for each customer
+
 Age: Age of the customer
-TypeofContact: Mode of contact (Company Invited / Self Inquiry)
+
+Type of Contact: Mode of contact (Company Invited / Self Inquiry)
+
 CityTier: City category based on development and population (Tier 1, Tier 2, Tier 3)
+
 Occupation: Customer’s profession (Salaried, Freelancer, etc.)
+
 Gender: Gender of the customer
-NumberOfPersonVisiting: Total number of people traveling with the customer
-PreferredPropertyStar: Preferred hotel star rating
-MaritalStatus: Marital status (Single, Married, Divorced)
-NumberOfTrips: Average number of annual trips
+
+Number Of Person Visiting: Total number of people traveling with the customer
+
+Preferred Property Star: Preferred hotel star rating
+
+Marital Status: Marital status (Single, Married, Divorced)
+
+Number Of Trips: Average number of annual trips
+
 Passport: Passport availability (0: No, 1: Yes)
+
 OwnCar: Car ownership (0: No, 1: Yes)
-NumberOfChildrenVisiting: Number of children below 5 years
+
+Number Of Children Visiting: Number of children below 5 years
+
 Designation: Job designation
-MonthlyIncome: Monthly income of the customer
+
+Monthly Income: Monthly income of the customer
 
 # Customer Interaction Data
 PitchSatisfactionScore: Customer satisfaction score for the sales pitch
+
 ProductPitched: Product pitched to the customer
+
 NumberOfFollowups: Number of follow-ups after the sales pitch
+
 DurationOfPitch: Duration (in minutes) of the sales pitch
+
 Technology Stack
+
 Programming Language: Python
+
 Machine Learning: Scikit-learn
+
 Version Control: Git & GitHub
+
 CI/CD Automation: GitHub Actions
+
 MLOps Practices: Automated training, testing, and deployment readiness
 
 # Business Impact
