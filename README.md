@@ -34,61 +34,62 @@ The dataset consists of customer demographics and interaction attributes used to
 # Target Variable
 ProdTaken: Indicates whether the customer purchased the package
 
-# 0 – No
-# 1 – Yes
+**0** – No
+
+**1** – Yes
 
 # Customer Details
 
-Customer ID: Unique identifier for each customer
+**Customer ID:** Unique identifier for each customer
 
-Age: Age of the customer
+**Age:** Age of the customer
 
-Type of Contact: Mode of contact (Company Invited / Self Inquiry)
+**Type of Contact:** Mode of contact (Company Invited / Self Inquiry)
 
-CityTier: City category based on development and population (Tier 1, Tier 2, Tier 3)
+**City Tier:** City category based on development and population (Tier 1, Tier 2, Tier 3)
 
-Occupation: Customer’s profession (Salaried, Freelancer, etc.)
+**Occupation:** Customer’s profession (Salaried, Freelancer, etc.)
 
-Gender: Gender of the customer
+**Gender:** Gender of the customer
 
-Number Of Person Visiting: Total number of people traveling with the customer
+**Number Of Person Visiting:** Total number of people traveling with the customer
 
-Preferred Property Star: Preferred hotel star rating
+**Preferred Property Star:** Preferred hotel star rating
 
-Marital Status: Marital status (Single, Married, Divorced)
+**Marital Status:** Marital status (Single, Married, Divorced)
 
-Number Of Trips: Average number of annual trips
+**Number Of Trips:** Average number of annual trips
 
-Passport: Passport availability (0: No, 1: Yes)
+**Passport:** Passport availability (0: No, 1: Yes)
 
-OwnCar: Car ownership (0: No, 1: Yes)
+**Own Car:** Car ownership (0: No, 1: Yes)
 
-Number Of Children Visiting: Number of children below 5 years
+**Number Of Children Visiting:** Number of children below 5 years
 
-Designation: Job designation
+**Designation:** Job designation
 
-Monthly Income: Monthly income of the customer
+**Monthly Income:** Monthly income of the customer
 
 # Customer Interaction Data
-PitchSatisfactionScore: Customer satisfaction score for the sales pitch
+**Pitch Satisfaction Score:** Customer satisfaction score for the sales pitch
 
-ProductPitched: Product pitched to the customer
+**Product Pitched:** Product pitched to the customer
 
-NumberOfFollowups: Number of follow-ups after the sales pitch
+**Number Of Follow ups:** Number of follow-ups after the sales pitch
 
-DurationOfPitch: Duration (in minutes) of the sales pitch
+**Duration Of Pitch:** Duration (in minutes) of the sales pitch
 
-Technology Stack
+# Technology Stack
 
-Programming Language: Python
+**Programming Language:** Python
 
-Machine Learning: Scikit-learn
+**Machine Learning:** Scikit-learn
 
-Version Control: Git & GitHub
+**Version Control:** Git & GitHub
 
-CI/CD Automation: GitHub Actions
+**CI/CD Automation:** GitHub Actions
 
-MLOps Practices: Automated training, testing, and deployment readiness
+**MLOps Practices:** Automated training, testing, and deployment readiness
 
 # Business Impact
 This predictive MLOps solution enables:
