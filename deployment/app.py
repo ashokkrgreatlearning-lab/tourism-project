@@ -4,10 +4,29 @@ import streamlit as st
 import pandas as pd
 import joblib
 
+# Page configuration
 st.set_page_config(
     page_title="Tourism Prediction App",
+    page_icon="🌍",
     layout="wide"
 )
+
+# App heading
+st.title("🌍 Tourism Package Prediction App")
+
+# Tourism banner image
+st.image(
+    "https://images.unsplash.com/photo-1488646953014-85cb44e25828",
+    caption="Explore the World with Tourism Packages",
+    use_container_width=True
+)
+
+st.markdown(
+    "### ✈️ Predict Customer Interest in Tourism Packages"
+)
+
+st.write(
+
 
 
 # Model location
