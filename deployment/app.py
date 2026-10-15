@@ -11,9 +11,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# App heading
-st.title("🌍 Tourism Package Prediction App")
-
 # Tourism banner image
 st.image(
     "https://images.unsplash.com/photo-1488646953014-85cb44e25828",
@@ -24,16 +21,6 @@ st.image(
 st.markdown(
     "### ✈️ Predict Customer Interest in Tourism Packages"
 )
-
-st.write(
-    "This application uses Machine Learning to predict "
-    "whether a customer is likely to purchase a tourism package "
-    "based on their demographic and travel preferences."
-)
-
-st.divider()
-
-
 
 # Model location
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
