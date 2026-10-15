@@ -26,6 +26,12 @@ st.markdown(
 )
 
 st.write(
+    "This application uses Machine Learning to predict "
+    "whether a customer is likely to purchase a tourism package "
+    "based on their demographic and travel preferences."
+)
+
+st.divider()
 
 
 
