@@ -4,25 +4,46 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Page configuration
+# ============================================================
+# 1. PAGE CONFIGURATION
+# ============================================================
+
 st.set_page_config(
-    page_title="Tourism Prediction App",
+    page_title="Tourism Package Prediction App",
     page_icon="🌍",
     layout="wide"
 )
 
-# Tourism banner image
+# ============================================================
+# 2. APPLICATION HEADER AND TOURISM IMAGE
+# ============================================================
+
+st.title("🌍 Tourism Package Purchase Prediction App")
+
+st.markdown(
+    "### ✈️ Predict Customer Interest in Tourism Packages"
+)
+
 st.image(
     "https://images.unsplash.com/photo-1488646953014-85cb44e25828",
     caption="Explore the World with Tourism Packages",
     use_container_width=True
 )
 
-st.markdown(
-    "### ✈️ Predict Customer Interest in Tourism Packages"
-)
+st.write("""
+This Machine Learning application predicts the probability of
+a customer purchasing a Tourism Package based on demographic
+information, travel preferences, and sales interaction details.
 
-# Model location
+Please enter the customer information below to generate a prediction.
+""")
+
+st.divider()
+
+# ============================================================
+# 3. DEFINE MODEL PATH
+# ============================================================
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 MODEL_PATH = os.path.join(
@@ -30,124 +51,190 @@ MODEL_PATH = os.path.join(
     "best_tourism_model_v1.joblib"
 )
 
-# Load model
+# ============================================================
+# 4. LOAD TRAINED MODEL
+# ============================================================
+
 @st.cache_resource
 def load_model():
-    if not os.path.exists(MODEL_PATH):
+
+    if not os.path.isfile(MODEL_PATH):
         raise FileNotFoundError(
-            f"Model not found at: {MODEL_PATH}"
+            f"Model file not found: {MODEL_PATH}"
         )
 
     return joblib.load(MODEL_PATH)
 
+
 try:
     model = load_model()
-    st.success("Model loaded successfully!")
+    st.success("✅ Machine Learning model loaded successfully!")
 
 except Exception as e:
     st.error(f"Model Loading Error: {e}")
     st.exception(e)
     st.stop()
 
-# Streamlit UI for Tourism Package Prediction
-st.title("Wellness Tourism Package Prediction App")
+# ============================================================
+# 5. CUSTOMER INPUT FORM
+# ============================================================
 
-st.write("""
-This application predicts the **probability of a customer purchasing
-a Wellness Tourism Package** based on customer information and
-sales interaction details.
+st.subheader("👤 Customer Information")
 
-Please enter the required information below to get a prediction.
-""")
+with st.form("tourism_prediction_form"):
 
-# User input
-age = st.number_input(
-    "Age", min_value=18, max_value=100, value=35, step=1
-)
+    col1, col2 = st.columns(2)
 
-contact_type = st.selectbox(
-    "Type of Contact", ["Self Enquiry", "Company Invited"]
-)
+    # --------------------------------------------------------
+    # LEFT COLUMN
+    # --------------------------------------------------------
 
-city_tier = st.selectbox(
-    "City Tier", [1, 2, 3]
-)
+    with col1:
 
-duration_pitch = st.number_input(
-    "Duration of Pitch (Minutes)",
-    min_value=1, max_value=120, value=15
-)
+        age = st.number_input(
+            "Age",
+            min_value=18,
+            max_value=100,
+            value=35,
+            step=1
+        )
 
-occupation = st.selectbox(
-    "Occupation",
-    ["Salaried", "Small Business", "Large Business", "Free Lancer"]
-)
+        contact_type = st.selectbox(
+            "Type of Contact",
+            ["Self Enquiry", "Company Invited"]
+        )
 
-gender = st.selectbox(
-    "Gender", ["Male", "Female"]
-)
+        city_tier = st.selectbox(
+            "City Tier",
+            [1, 2, 3]
+        )
 
-persons_visiting = st.number_input(
-    "Number of Persons Visiting",
-    min_value=1, max_value=20, value=2
-)
+        duration_pitch = st.number_input(
+            "Duration of Pitch (Minutes)",
+            min_value=1,
+            max_value=120,
+            value=15
+        )
 
-followups = st.number_input(
-    "Number of Follow-ups",
-    min_value=0, max_value=10, value=3
-)
+        occupation = st.selectbox(
+            "Occupation",
+            [
+                "Salaried",
+                "Small Business",
+                "Large Business",
+                "Free Lancer"
+            ]
+        )
 
-product_pitched = st.selectbox(
-    "Product Pitched",
-    ["Basic", "Standard", "Deluxe", "Super Deluxe", "King"]
-)
+        gender = st.selectbox(
+            "Gender",
+            ["Male", "Female"]
+        )
 
-property_star = st.selectbox(
-    "Preferred Property Star", [3, 4, 5]
-)
+        persons_visiting = st.number_input(
+            "Number of Persons Visiting",
+            min_value=1,
+            max_value=20,
+            value=2
+        )
 
-marital_status = st.selectbox(
-    "Marital Status",
-    ["Single", "Married", "Divorced"]
-)
+        followups = st.number_input(
+            "Number of Follow-ups",
+            min_value=0,
+            max_value=10,
+            value=3
+        )
 
-number_trips = st.number_input(
-    "Number of Trips",
-    min_value=0, max_value=30, value=3
-)
+        product_pitched = st.selectbox(
+            "Product Pitched",
+            [
+                "Basic",
+                "Standard",
+                "Deluxe",
+                "Super Deluxe",
+                "King"
+            ]
+        )
 
-passport = st.selectbox(
-    "Passport", [1, 0],
-    format_func=lambda x: "Yes" if x == 1 else "No"
-)
+    # --------------------------------------------------------
+    # RIGHT COLUMN
+    # --------------------------------------------------------
 
-satisfaction = st.selectbox(
-    "Pitch Satisfaction Score", [1, 2, 3, 4, 5]
-)
+    with col2:
 
-own_car = st.selectbox(
-    "Own Car", [1, 0],
-    format_func=lambda x: "Yes" if x == 1 else "No"
-)
+        property_star = st.selectbox(
+            "Preferred Property Star",
+            [3, 4, 5]
+        )
 
-children_visiting = st.number_input(
-    "Number of Children Visiting",
-    min_value=0, max_value=10, value=1
-)
+        marital_status = st.selectbox(
+            "Marital Status",
+            ["Unmarried", "Married", "Divorced"]
+        )
 
-designation = st.selectbox(
-    "Designation",
-    ["Executive", "Manager", "Senior Manager", "AVP", "VP"]
-)
+        number_trips = st.number_input(
+            "Number of Trips",
+            min_value=0,
+            max_value=30,
+            value=3
+        )
 
-monthly_income = st.number_input(
-    "Monthly Income",
-    min_value=1000, max_value=1000000,
-    value=25000, step=1000
-)
+        passport = st.selectbox(
+            "Passport",
+            [1, 0],
+            format_func=lambda x: "Yes" if x == 1 else "No"
+        )
 
-# Assemble input into DataFrame
+        satisfaction = st.selectbox(
+            "Pitch Satisfaction Score",
+            [1, 2, 3, 4, 5]
+        )
+
+        own_car = st.selectbox(
+            "Own Car",
+            [1, 0],
+            format_func=lambda x: "Yes" if x == 1 else "No"
+        )
+
+        children_visiting = st.number_input(
+            "Number of Children Visiting",
+            min_value=0,
+            max_value=10,
+            value=1
+        )
+
+        designation = st.selectbox(
+            "Designation",
+            [
+                "Executive",
+                "Manager",
+                "Senior Manager",
+                "AVP",
+                "VP"
+            ]
+        )
+
+        monthly_income = st.number_input(
+            "Monthly Income",
+            min_value=1000,
+            max_value=1000000,
+            value=25000,
+            step=1000
+        )
+
+    st.divider()
+
+    predict_button = st.form_submit_button(
+        "🔮 Predict Tourism Package Purchase",
+        use_container_width=True
+    )
+
+# ============================================================
+# 6. PREPARE INPUT DATA
+# ============================================================
+
 input_data = pd.DataFrame([{
+
     "Age": age,
     "TypeofContact": contact_type,
     "CityTier": city_tier,
@@ -166,45 +253,140 @@ input_data = pd.DataFrame([{
     "NumberOfChildrenVisiting": children_visiting,
     "Designation": designation,
     "MonthlyIncome": monthly_income
+
 }])
 
-# Add index column only if required by the trained pipeline
-input_data["__index_level_0__"] = 0
+# ============================================================
+# 7. CUSTOMER PURCHASE PREDICTION
+# ============================================================
 
-# Prediction
-if st.button("Predict Tourism Package Purchase"):
+if predict_button:
 
     try:
+
+        # Match the input columns expected by the model
+        expected_features = getattr(
+            model,
+            "feature_names_in_",
+            None
+        )
+
+        if expected_features is not None:
+
+            expected_features = list(expected_features)
+
+            # Add index column only if model expects it
+            if "__index_level_0__" in expected_features:
+                input_data["__index_level_0__"] = 0
+
+            missing_features = [
+                feature
+                for feature in expected_features
+                if feature not in input_data.columns
+            ]
+
+            if missing_features:
+                raise ValueError(
+                    f"Missing model features: {missing_features}"
+                )
+
+            input_data = input_data[expected_features]
+
+        # Generate prediction
         prediction = model.predict(input_data)[0]
 
-        st.subheader("Prediction Result:")
+        st.divider()
+        st.subheader("📊 Tourism Package Prediction Result")
 
-        if int(prediction) == 1:
+        if str(prediction) == "1":
+
             st.success(
-                "Customer is likely to purchase the "
-                "Wellness Tourism Package."
-            )
-        else:
-            st.warning(
-                "Customer is unlikely to purchase the "
-                "Wellness Tourism Package."
+                "✅ Customer is likely to purchase "
+                "the Tourism Package."
             )
 
-        # Purchase probability
+        else:
+
+            st.warning(
+                "⚠️ Customer is unlikely to purchase "
+                "the Tourism Package."
+            )
+
+        # ----------------------------------------------------
+        # PURCHASE PROBABILITY
+        # ----------------------------------------------------
+
         if hasattr(model, "predict_proba"):
+
             classes = list(model.classes_)
 
-            positive_class = (
-                1 if 1 in classes else "1"
+            positive_index = next(
+                (
+                    i for i, value in enumerate(classes)
+                    if str(value) == "1"
+                ),
+                None
             )
 
-            positive_index = classes.index(positive_class)
+            if positive_index is not None:
 
-            probability = model.predict_proba(input_data)[0][positive_index]
+                probability = model.predict_proba(
+                    input_data
+                )[0][positive_index]
 
-            st.write(
-                f"**Purchase Probability: {probability:.2%}**"
+                st.metric(
+                    label="Probability of Purchasing Tourism Package",
+                    value=f"{probability:.2%}"
+                )
+
+                st.progress(
+                    min(max(float(probability), 0.0), 1.0)
+                )
+
+                if probability >= 0.75:
+
+                    st.info(
+                        "High purchase probability. "
+                        "Customer may be a strong potential buyer."
+                    )
+
+                elif probability >= 0.50:
+
+                    st.info(
+                        "Moderate purchase probability. "
+                        "Customer may benefit from follow-up."
+                    )
+
+                else:
+
+                    st.info(
+                        "Low purchase probability. "
+                        "Additional engagement may be required."
+                    )
+
+        # ----------------------------------------------------
+        # DISPLAY INPUT DATA
+        # ----------------------------------------------------
+
+        with st.expander("🔍 View Customer Input Details"):
+
+            st.dataframe(
+                input_data,
+                use_container_width=True
             )
 
     except Exception as e:
+
         st.error(f"Prediction Error: {e}")
+        st.exception(e)
+
+# ============================================================
+# 8. FOOTER
+# ============================================================
+
+st.divider()
+
+st.caption(
+    "🌍 Tourism Package Prediction App | "
+    "Machine Learning Based Customer Purchase Prediction"
+)
