@@ -19,15 +19,15 @@ st.set_page_config(
 # 2. APPLICATION HEADER AND TOURISM IMAGE
 # ============================================================
 
-st.title("🌍 Tourism Package Purchase Prediction App")
+st.title("🌍 Assignment 10:Tourism Package Purchase Prediction App")
 
 st.markdown(
     "### ✈️ Predict Customer Interest in Tourism Packages"
 )
 
 st.image(
-    "https://images.unsplash.com/photo-1488646953014-85cb44e25828",
-    caption="Explore the World with Tourism Packages",
+    "https://images.unsplash.com/photo-1564507592333-c60657eea523",
+    caption="🇮🇳 Incredible India – Explore the Beauty of Indian Tourism",
     use_container_width=True
 )
 
