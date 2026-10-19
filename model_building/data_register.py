@@ -1,32 +1,120 @@
 
+import os
 import pandas as pd
 
-RAW_PATH = "data/tourism.csv"
+# ==========================================
+# Step 1: Define Project Paths
+# ==========================================
 
-# Load the raw dataset. A small number of rows contain an app name with an
-# unescaped embedded quote (e.g. Retro Arcade "Classic" Games), which breaks
-# CSV tokenization. on_bad_lines="skip" drops just those malformed rows
-# instead of failing the whole pipeline; the count skipped is reported below.
-rows_before = sum(1 for _ in open(RAW_PATH, encoding="utf-8", errors="replace")) - 1
-df = pd.read_csv(RAW_PATH, on_bad_lines="skip")
-rows_skipped = rows_before - df.shape[0]
-if rows_skipped:
-    print(f"Skipped {rows_skipped} malformed row(s) while parsing {RAW_PATH}.")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(BASE_DIR)
 
-# Load the raw dataset
+RAW_PATH = os.path.join(
+    PROJECT_DIR,
+    "data",
+    "tourism.csv"
+)
+
+# ==========================================
+# Step 2: Verify Dataset Exists
+# ==========================================
+
+if not os.path.isfile(RAW_PATH):
+    raise FileNotFoundError(
+        f"Dataset not found at: {RAW_PATH}"
+    )
+
+print("Dataset found:", RAW_PATH)
+
+# ==========================================
+# Step 3: Load Raw Dataset
+# ==========================================
+
 df = pd.read_csv(RAW_PATH)
 
-# Validate that the expected columns are present before registering it
-expected_columns = ["CustomerID", "ProdTaken", "Age", "TypeofContact", "CityTier", "DurationOfPitch", "Occupation",
-                    "Gender","NumberOfPersonVisiting","NumberOfFollowups","ProductPitched","PreferredPropertyStar",
-                    "MaritalStatus","NumberOfTrips","Passport","PitchSatisfactionScore","OwnCar","NumberOfChildrenVisiting",
-                    "Designation","MonthlyIncome"]
-missing = [c for c in expected_columns if c not in df.columns]
-if missing:
-    raise ValueError(f"Dataset is missing expected columns: {missing}")
+print("\nDataset loaded successfully!")
 
-print("Dataset registered successfully.")
-print(f"Rows: {df.shape[0]}, Columns: {df.shape[1]}")
-print("Columns:", list(df.columns))
-print("Target column preview (charges):")
-print(df["charges"].describe())
+# ==========================================
+# Step 4: Validate Expected Columns
+# ==========================================
+
+expected_columns = [
+    "CustomerID",
+    "ProdTaken",
+    "Age",
+    "TypeofContact",
+    "CityTier",
+    "DurationOfPitch",
+    "Occupation",
+    "Gender",
+    "NumberOfPersonVisiting",
+    "NumberOfFollowups",
+    "ProductPitched",
+    "PreferredPropertyStar",
+    "MaritalStatus",
+    "NumberOfTrips",
+    "Passport",
+    "PitchSatisfactionScore",
+    "OwnCar",
+    "NumberOfChildrenVisiting",
+    "Designation",
+    "MonthlyIncome"
+]
+
+missing_columns = [
+    col for col in expected_columns
+    if col not in df.columns
+]
+
+if missing_columns:
+    raise ValueError(
+        f"Dataset is missing columns: {missing_columns}"
+    )
+
+print("\nAll required columns validated!")
+
+# ==========================================
+# Step 5: Dataset Information
+# ==========================================
+
+print("\nDataset registered successfully!")
+
+print("Total Rows:", df.shape[0])
+print("Total Columns:", df.shape[1])
+
+print("\nDataset Columns:")
+print(df.columns.tolist())
+
+# ==========================================
+# Step 6: Check Missing Values
+# ==========================================
+
+print("\nMissing Values:")
+print(df.isnull().sum())
+
+# ==========================================
+# Step 7: Target Variable Summary
+# ==========================================
+
+print("\nTarget Variable: ProdTaken")
+
+print(df["ProdTaken"].value_counts(dropna=False))
+
+print("\nTarget Distribution (%):")
+
+print(
+    df["ProdTaken"]
+    .value_counts(normalize=True, dropna=False)
+    .mul(100)
+    .round(2)
+)
+
+# ==========================================
+# Step 8: Preview Dataset
+# ==========================================
+
+print("\nFirst Five Rows:")
+
+print(df.head())
+
+print("\nDataset Registration Completed!")
