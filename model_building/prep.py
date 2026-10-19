@@ -1,7 +1,13 @@
 
-import os
+# for data manipulation
 import pandas as pd
+import sklearn
+
+# for data preprocessing and pipeline creation
 from sklearn.model_selection import train_test_split
+
+# for converting text data in to numerical representation
+from sklearn.preprocessing import LabelEncoder
 
 # 1. Define paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -9,7 +15,6 @@ PROJECT_DIR = os.path.dirname(BASE_DIR)
 DATA_DIR = os.path.join(PROJECT_DIR, "data")
 
 os.makedirs(DATA_DIR, exist_ok=True)
-
 RAW_PATH = os.path.join(DATA_DIR, "tourism.csv")
 
 # 2. Load dataset
