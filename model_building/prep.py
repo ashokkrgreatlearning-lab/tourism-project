@@ -32,7 +32,7 @@ print("Step 1: Dataset loaded successfully!")
 print("Original shape:", df.shape)
 
 # ==========================================
-# 4. Remove Unnecessary Columns
+# 4. Let us now Remove Unnecessary Columns
 # ==========================================
 print("\nStep 2: Performing data cleaning...")
 
