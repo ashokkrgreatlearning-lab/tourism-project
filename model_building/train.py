@@ -249,7 +249,7 @@ print(mlflow.get_tracking_uri())
 # STEP 10: Train Model with MLflow
 # =====================================================
 
-classification_threshold = 0.45
+classification_threshold = 0.50
 
 with mlflow.start_run(
     run_name="Optimized_XGB_Model_PROD_Standalone"
