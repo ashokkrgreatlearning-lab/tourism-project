@@ -1,5 +1,0 @@
-{
-    "classification_threshold": 0.5,
-    "model_name": "best_tourism_model_v1.joblib",
-    "target_column": "ProdTaken"
-}
